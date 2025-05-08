@@ -79,35 +79,39 @@ Dataset yang digunakan dalam proyek ini adalah Student Habits vs Academic Perfor
 | `extracurricular_participation` | object  | 0              | 2           | [Yes, No]                             |
 | `exam_score`                  | float64   | 0              | 480         | [56.2, 100.0, 34.3, 26.8, 66.4]      |
 
-Dataset terdiri dari 1.000 sampel mahasiswa dengan 16 variabel. Tidak ada nilai yang duplikat dan hilang kecuali pada `parental_education_level` yang memiliki 91 missing values. Sebagian besar fitur sudah bersih dan siap untuk analisis.Fitur `parental_education_level` dilakukan imputasi dengan menambahkan nilai "Unknown" untuk mengatasi missing values yang ada.
+Dataset terdiri dari 1.000 sampel mahasiswa dengan 16 variabel. Tidak ada nilai yang duplikat dan hilang kecuali pada `parental_education_level` yang memiliki 91 missing values. Sebagian besar fitur sudah bersih dan siap untuk analisis. Fitur `parental_education_level` dilakukan imputasi dengan menambahkan nilai "Unknown" untuk mengatasi missing values yang ada.
 
 ### Exploratory Data Analysis (EDA):
 
 <div align="center">
-  <img src="Extrakulikuler Participation.png" width="400"/>
+  <img src="https://github.com/user-attachments/assets/70d694cf-75ab-4bc0-84c5-19ae975a0908" width="400"/>
 </div>
+‎ 
 
-68% mahasiswa tidak mengikuti kegiatan ekstrakurikuler Ini menunjukkan keterlibatan non-akademik tergolong rendah dan bisa menjadi indikator keseimbangan antara kegiatan akademik dan sosial.
+68% mahasiswa tidak mengikuti kegiatan ekstrakurikuler Ini menunjukkan keterlibatan non-akademik tergolong rendah dan bisa menjadi indikator keseimbangan antara kegiatan akademik dan sosial.  
+‎ 
 
 <div align="center">
-  <img src="Part Time Job.png" width="400"/>
+  <img src="https://github.com/user-attachments/assets/d25f929b-dbef-457d-b0c3-b7f448850674" width="400"/>
 </div>
+‎ 
 
-78% mahasiswa tidak memiliki pekerjaan paruh waktu. Hal ini mengindikasikan bahwa sebagian besar mahasiswa fokus pada studi, namun juga memberi peluang untuk menganalisis dampak pekerjaan terhadap performa belajar.
+78% mahasiswa tidak memiliki pekerjaan paruh waktu. Hal ini mengindikasikan bahwa sebagian besar mahasiswa fokus pada studi, namun juga memberi peluang untuk menganalisis dampak pekerjaan terhadap performa belajar.  
+‎ 
 
 <div align="center">
-  <img src="Distribusi Fitur Numerik.png" width="400"/>
+  <img src="https://github.com/user-attachments/assets/72027404-50ca-44f3-b2e6-d021c8be86ea" width="400"/>
 </div>
+‎ 
 
-`exam_score` dan `attendance_percentage` cenderung left-skewed, menunjukkan mayoritas siswa memiliki nilai tinggi dan sering masuk. Fitur seperti `study_hours_per_day` dan `sleep_hours` memiliki distribusi mendekati normal, mencerminkan variasi alami. Sementara itu, `netflix_hours` dan `social_media_hours` bersifat right-skewed, menandakan sebagian besar mahasiswa hanya sedikit melakukannya. Sisanya tersebar merata, menunjukkan data yang representatif.
-
-<div align="center">
-  <img src="Hubungan Antar Fitur Numerik.png" width="400"/>
-</div>
+`exam_score` dan `attendance_percentage` cenderung left-skewed, menunjukkan mayoritas siswa memiliki nilai tinggi dan sering masuk. Fitur seperti `study_hours_per_day` dan `sleep_hours` memiliki distribusi mendekati normal, mencerminkan variasi alami. Sementara itu, `netflix_hours` dan `social_media_hours` bersifat right-skewed, menandakan sebagian besar mahasiswa hanya sedikit melakukannya. Sisanya tersebar merata, menunjukkan data yang representatif.  
+‎ 
 
 <div align="center">
-  <img src="Matriks Korelasi.png" width="400"/>
+  <img src="https://github.com/user-attachments/assets/36a40eb2-cb00-438e-ba70-fde67f5b5d6b" height="300"/>
+  <img src="https://github.com/user-attachments/assets/9091cc29-04d9-4762-9dc3-cb259eb72622" height="300"/>
 </div>
+‎ 
 
 Fitur `study_hours_per_day` menunjukkan korelasi sangat kuat terhadap `exam_score` dengan nilai +0.83, menandakan bahwa semakin lama waktu belajar per hari, semakin tinggi kemungkinan nilai ujian mahasiswa. Sebaliknya, `social_media_hours` dan `netflix_hours` berkorelasi negatif (-0.17) dengan `exam_score`, mengindikasikan bahwa penggunaan waktu berlebih pada aktivitas ini mungkin berdampak pada penurunan performa akademik. Fitur lainnya seperti `age`tidak memiliki pengaruh korelatif yang signifikan terhadap skor ujian.
 
@@ -205,23 +209,18 @@ Pada tahap ini, dilakukan evaluasi terhadap model menggunakan beberapa metrik re
 
 ### Metrik Evaluasi yang Digunakan:
 
-* **MSE (Mean Squared Error):**
+**MSE (Mean Squared Error):**
 
-  $$
-  MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y_i})^2
-  $$
+![MSE](https://latex.codecogs.com/png.image?\huge&space;\dpi{110}\bg{white}\textbf{$$MSE=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y_i})^2$$})
 
-* **MAE (Mean Absolute Error):**
+**MAE (Mean Absolute Error):**
 
-  $$
-  MAE = \frac{1}{n} \sum_{i=1}^{n} | y_i - \hat{y_i} |
-  $$
+![MAE](https://latex.codecogs.com/png.image?\huge&space;\dpi{110}\bg{white}\textbf{$$MAE=\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y_i}|$$})
 
-* **R² Score:**
+**R² Score:**
 
-  $$
-  R^2 = 1 - \frac{\sum (y_i - \hat{y_i})^2}{\sum (y_i - \bar{y})^2}
-  $$
+![R²](https://latex.codecogs.com/png.image?\huge&space;\dpi{110}\bg{white}\textbf{$$R^2=1-\frac{\sum(y_i-\hat{y_i})^2}{\sum(y_i-\bar{y})^2}$$})
+
 
 | **Metrik**           | **Penjelasan**                                                                                                                                                                   |
 |----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
