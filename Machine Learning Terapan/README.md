@@ -31,7 +31,7 @@ Untuk menjawab pertanyaan tersebut, predictive modelling akan dibangun dengan tu
 
 - Melakukan analisis statistik dan visualisasi data untuk mengidentifikasi pola, outlier, dan korelasi antara variabel kebiasaan siswa dengan performa akademik.
 - Mengimplementasikan algoritma Linear Regression, Random Forest, dan Gradient Boosting untuk membangun model prediktif yang akurat dalam mengklasifikasikan tingkat performa akademik siswa.
-- Menggunakan metrik evaluasi seperti MAE (Mean Absolute Error) dan R²-score untuk mengukur efektivitas model regresi.
+- Menggunakan metrik evaluasi seperti MSE (Mean Squared Error), MAE (Mean Absolute Error) dan R²-score untuk mengukur efektivitas model regresi.
 - Melakukan hyperparameter tuning menggunakan GridSearchCV untuk meningkatkan performa model secara signifikan.
 
 ## Data Understanding
@@ -149,10 +149,6 @@ Pada tahap ini, dilakukan beberapa proses data preparation agar dataset siap dig
   - X (fitur): Semua kolom kecuali `exam_score`.
   - y (target): Kolom `exam_score`.
 - Pembagian ini dilakukan untuk memastikan model tidak overfitting terhadap data training. Data testing digunakan untuk mengevaluasi performa model pada data baru yang tidak pernah dilihat sebelumnya.
-
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
 
 ## Modeling
 Pada tahap ini, dilakukan proses pengembangan model machine learning untuk memprediksi exam_score berdasarkan fitur-fitur yang ada. Algoritma yang digunakan adalah Linear Regression, Random Forest Regressor, dan Gradient Boosting Regressor.
