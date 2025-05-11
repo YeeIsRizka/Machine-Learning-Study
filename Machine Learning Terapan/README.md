@@ -17,14 +17,14 @@ Xu, X., Wang, J., Peng, H., & Wu, R. (2019). Prediction of academic performance 
 ## Business Understanding
 
 ### Problem Statements
-Berdasarkan kondisi yang telah diuraikan sebelumnya, proyek ini bertujuan untuk mengembangkan sistem prediksi performa akademik mahasiswa untuk menjawab permasalahan berikut:
+Berdasarkan kondisi yang telah diuraikan sebelumnya, proyek ini bertujuan untuk mengembangkan sistem prediksi performa akademik siswa untuk menjawab permasalahan berikut:
 - Bagaimana pengaruh kebiasaan sehari-hari (studi, tidur, media sosial, diet, dan kesehatan mental) terhadap nilai akhir siswa?
 - Faktor apa yang paling dominan memengaruhi nilai akademik siswa?
 
 
 ### Goals
 Untuk menjawab pertanyaan tersebut, predictive modelling akan dibangun dengan tujuan atau goals sebagai berikut:
-- Membuat model machine learning yang dapat memprediksi performa akademik mahasiswa seakurat mungkin berdasarkan kebiasaan sehari-hari.
+- Membuat model machine learning yang dapat memprediksi performa akademik siswa seakurat mungkin berdasarkan kebiasaan sehari-hari.
 - Mengidentifikasi faktor dominan yang dapat diintervensi untuk meningkatkan kinerja akademik.
 
 ### Solution statements
@@ -79,7 +79,7 @@ Dataset yang digunakan dalam proyek ini adalah Student Habits vs Academic Perfor
 | `extracurricular_participation` | object  | 0              | 2           | [Yes, No]                             |
 | `exam_score`                  | float64   | 0              | 480         | [56.2, 100.0, 34.3, 26.8, 66.4]      |
 
-Dataset terdiri dari 1.000 sampel mahasiswa dengan 16 variabel. Tidak ada nilai yang duplikat dan hilang kecuali pada `parental_education_level` yang memiliki 91 missing values. Sebagian besar fitur sudah bersih dan siap untuk analisis. Fitur `parental_education_level` dilakukan imputasi dengan menambahkan nilai "Unknown" untuk mengatasi missing values yang ada.
+Dataset terdiri dari 1.000 sampel siswa dengan 16 variabel. Tidak ada nilai yang duplikat dan hilang kecuali pada `parental_education_level` yang memiliki 91 missing values. Sebagian besar fitur sudah bersih dan siap untuk analisis. Fitur `parental_education_level` dilakukan imputasi dengan menambahkan nilai "Unknown" untuk mengatasi missing values yang ada.
 
 ### Exploratory Data Analysis (EDA):
 
@@ -88,7 +88,7 @@ Dataset terdiri dari 1.000 sampel mahasiswa dengan 16 variabel. Tidak ada nilai 
 </div>
 ‎ 
 
-68% mahasiswa tidak mengikuti kegiatan ekstrakurikuler Ini menunjukkan keterlibatan non-akademik tergolong rendah dan bisa menjadi indikator keseimbangan antara kegiatan akademik dan sosial.  
+68% siswa tidak mengikuti kegiatan ekstrakurikuler Ini menunjukkan keterlibatan non-akademik tergolong rendah dan bisa menjadi indikator keseimbangan antara kegiatan akademik dan sosial.  
 ‎ 
 
 <div align="center">
@@ -96,7 +96,7 @@ Dataset terdiri dari 1.000 sampel mahasiswa dengan 16 variabel. Tidak ada nilai 
 </div>
 ‎ 
 
-78% mahasiswa tidak memiliki pekerjaan paruh waktu. Hal ini mengindikasikan bahwa sebagian besar mahasiswa fokus pada studi, namun juga memberi peluang untuk menganalisis dampak pekerjaan terhadap performa belajar.  
+78% siswa tidak memiliki pekerjaan paruh waktu. Hal ini mengindikasikan bahwa sebagian besar siswa fokus pada studi, namun juga memberi peluang untuk menganalisis dampak pekerjaan terhadap performa belajar.  
 ‎ 
 
 <div align="center">
@@ -104,7 +104,7 @@ Dataset terdiri dari 1.000 sampel mahasiswa dengan 16 variabel. Tidak ada nilai 
 </div>
 ‎ 
 
-`exam_score` dan `attendance_percentage` cenderung left-skewed, menunjukkan mayoritas siswa memiliki nilai tinggi dan sering masuk. Fitur seperti `study_hours_per_day` dan `sleep_hours` memiliki distribusi mendekati normal, mencerminkan variasi alami. Sementara itu, `netflix_hours` dan `social_media_hours` bersifat right-skewed, menandakan sebagian besar mahasiswa hanya sedikit melakukannya. Sisanya tersebar merata, menunjukkan data yang representatif.  
+`exam_score` dan `attendance_percentage` cenderung left-skewed, menunjukkan mayoritas siswa memiliki nilai tinggi dan sering masuk. Fitur seperti `study_hours_per_day` dan `sleep_hours` memiliki distribusi mendekati normal, mencerminkan variasi alami. Sementara itu, `netflix_hours` dan `social_media_hours` bersifat right-skewed, menandakan sebagian besar siswa hanya sedikit melakukannya. Sisanya tersebar merata, menunjukkan data yang representatif.  
 ‎ 
 
 <div align="center">
@@ -113,7 +113,7 @@ Dataset terdiri dari 1.000 sampel mahasiswa dengan 16 variabel. Tidak ada nilai 
 </div>
 ‎ 
 
-Fitur `study_hours_per_day` menunjukkan korelasi sangat kuat terhadap `exam_score` dengan nilai +0.83, menandakan bahwa semakin lama waktu belajar per hari, semakin tinggi kemungkinan nilai ujian mahasiswa. Sebaliknya, `social_media_hours` dan `netflix_hours` berkorelasi negatif (-0.17) dengan `exam_score`, mengindikasikan bahwa penggunaan waktu berlebih pada aktivitas ini mungkin berdampak pada penurunan performa akademik. Fitur lainnya seperti `age`tidak memiliki pengaruh korelatif yang signifikan terhadap skor ujian.
+Fitur `study_hours_per_day` menunjukkan korelasi sangat kuat terhadap `exam_score` dengan nilai +0.83, menandakan bahwa semakin lama waktu belajar per hari, semakin tinggi kemungkinan nilai ujian siswa. Sebaliknya, `social_media_hours` dan `netflix_hours` berkorelasi negatif (-0.17) dengan `exam_score`, mengindikasikan bahwa penggunaan waktu berlebih pada aktivitas ini mungkin berdampak pada penurunan performa akademik. Fitur lainnya seperti `age`tidak memiliki pengaruh korelatif yang signifikan terhadap skor ujian.
 
 ## Data Preparation
 Pada tahap ini, dilakukan beberapa proses data preparation agar dataset siap digunakan untuk proses training model machine learning. Proses yang dilakukan adalah sebagai berikut:
@@ -160,6 +160,15 @@ Pada tahap ini, dilakukan proses pengembangan model machine learning untuk mempr
 | **Linear Regression**           | Model sederhana yang dapat digunakan sebagai baseline untuk membandingkan performa model lain.                    |
 | **Random Forest Regressor**     | Model berbasis pohon keputusan yang efektif dalam menangani non-linearitas data dan menangani outliers.           |
 | **Gradient Boosting Regressor** | Model boosting yang menggabungkan beberapa pohon keputusan untuk meningkatkan akurasi dan mengurangi overfitting. |
+
+### Konsep dan Cara Kerja Setiap Model:
+| **Model**               | **Konsep**                                                                                      | **Cara Kerja**                                                                                                                                                           |
+|-------------------------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Linear Regression**   | Mencari hubungan linear antara variabel input (`X`) dan output (`y`) menggunakan persamaan linear. | Menghitung koefisien regresi yang meminimalkan Mean Squared Error (MSE) menggunakan metode Ordinary Least Squares (OLS) untuk mencari garis regresi terbaik.              |
+| **Random Forest**       | Model ensemble berbasis pohon keputusan yang menggabungkan beberapa pohon untuk meningkatkan akurasi. | Membuat sejumlah pohon keputusan (`n_estimators`) dengan data sampel acak. Pada setiap node, memilih subset fitur secara acak dan menentukan split terbaik berdasarkan MSE. Menggabungkan hasil prediksi semua pohon (rata-rata untuk regresi). |
+| **Gradient Boosting**   | Teknik ensemble yang menggabungkan beberapa pohon keputusan secara bertahap untuk memperbaiki kesalahan. | Model pertama dibentuk sebagai weak learner. Menghitung residuals (selisih antara nilai aktual dan prediksi). Setiap pohon baru dibuat untuk memprediksi residuals dari pohon sebelumnya dengan bobot `learning_rate`. Nilai prediksi akhir diperoleh dari penjumlahan semua pohon secara berurutan. |
+
+
 
 ### Kelebihan dan Kekurangan Setiap Algoritma:
 
@@ -254,9 +263,30 @@ Berikut adalah hasil evaluasi model berdasarkan metrik MSE, MAE, dan R² Score:
   * R² Test (`0.89`) mendekati hasil Linear Regression (`0.90`), menunjukkan bahwa model ini juga dapat menangkap pola data dengan baik.
   * MAE (`4.42`) berada di antara Linear Regression (`4.15`) dan Random Forest (`4.94`), menunjukkan bahwa model ini **lebih stabil** daripada Random Forest.
 
-### Kesimpulan dan Model Terbaik:
+### Apakah model menjawab *problem statement*?
 
-* Berdasarkan hasil evaluasi, model **Linear Regression** menunjukkan hasil yang stabil dan tidak overfitting.
-* Meskipun **Random Forest** memiliki Train MSE yang rendah (`6.60`), namun hasil Test MSE (`38.39`) menunjukkan adanya overfitting yang cukup parah.
-* **Gradient Boosting** memberikan hasil yang cukup baik (`Test MSE: 28.23`), namun Linear Regression tetap lebih stabil (`Test MSE: 26.24`).
-* Oleh karena itu, model terbaik yang dipilih adalah **Linear Regression** karena model ini mampu memberikan hasil yang stabil antara data training dan testing, serta R² yang tinggi (`0.90`).
+1. **Pengaruh kebiasaan sehari-hari terhadap nilai akademik**
+   Model menunjukkan bahwa fitur seperti `study_hours_per_day` memiliki korelasi positif yang sangat kuat (+0.83) terhadap `exam_score`, sementara `social_media_hours` dan `netflix_hours` berkorelasi negatif. Hal ini membuktikan bahwa kebiasaan sehari-hari siswa memang *berpengaruh signifikan* terhadap performa akademik.
+
+2. **Faktor dominan yang memengaruhi nilai akademik**
+   Hasil analisis dan feature importance (terutama pada Random Forest dan Gradient Boosting) menunjukkan bahwa **waktu belajar per hari**, **frekuensi olahraga**, dan **kesehatan mental** merupakan fitur yang paling berdampak terhadap prediksi skor ujian. Ini menjawab pertanyaan tentang faktor dominan dengan jelas dan terukur.
+
+### Apakah model berhasil mencapai *goals*?
+
+* **Goal 1: Membangun model prediktif akurat**
+  Model **Linear Regression** dipilih sebagai model terbaik dengan skor R² sebesar **0.90** pada data testing, menunjukkan bahwa model mampu menjelaskan 90% variasi nilai akademik berdasarkan kebiasaan siswa. Ini menandakan bahwa model cukup andal untuk digunakan dalam konteks dunia nyata.
+
+* **Goal 2: Mengidentifikasi faktor intervensi potensial**
+  Berdasarkan hasil evaluasi dan eksplorasi data, terdapat faktor yang dapat diintervensi seperti durasi belajar, kondisi mental, waktu untuk hiburan seperti netflix dan sosial media. Ini membuka peluang bagi pendidik untuk memberikan rekomendasi atau intervensi berbasis data.
+
+### Apakah solusi statement berdampak?
+
+Setiap solusi yang dirancang telah memberikan kontribusi nyata terhadap model dan insights:
+
+* **EDA** berhasil menyingkap korelasi signifikan, missing value, dan distribusi data yang penting untuk modeling.
+* **Tiga algoritma regresi** yang diuji memberikan pembanding performa. Meskipun Random Forest sangat kuat di training set, namun **Linear Regression** memberikan keseimbangan terbaik antara akurasi dan generalisasi.
+* **GridSearchCV** membantu meningkatkan performa model dengan menemukan parameter optimal, yang terbukti dari peningkatan R² pada Gradient Boosting dan Random Forest.
+
+### Kesimpulan
+
+Model yang dikembangkan tidak hanya memberikan akurasi yang tinggi, tetapi juga menghasilkan **insight yang relevan dan dapat ditindaklanjuti**. Hal ini sejalan dengan tujuan proyek untuk membantu pendidik dan siswa dalam **mengambil keputusan berbasis data** terkait kebiasaan belajar dan keseharian siswa.
