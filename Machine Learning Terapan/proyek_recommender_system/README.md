@@ -60,6 +60,8 @@ Kedua file tersebut saling melengkapi, di mana `games_detailed_info.csv` digunak
 
 ### Variabel-variabel pada dataset: `games_detailed_info.csv`
 
+<div align="center">
+
 | **No** | **Fitur**                       | **Deskripsi**                                                     |
 | ------ | ------------------------------- | ----------------------------------------------------------------- |
 | 1      | `type`                          | Jenis entitas (umumnya "boardgame")                               |
@@ -118,8 +120,10 @@ Kedua file tersebut saling melengkapi, di mana `games_detailed_info.csv` digunak
 | 54     | `Arcade Rank`                   | Peringkat untuk game di platform Arcade                           |
 | 55     | `Atari ST Rank`                 | Peringkat untuk game di platform Atari ST                         |
 
+</div>
 
 ### Variabel-variabel pada dataset: `bgg-15m-reviews.csv`
+<div align="center">
 
 | **No** | **Fitur** | **Deskripsi**                                                                |
 | ------ | --------- | ---------------------------------------------------------------------------- |
@@ -129,7 +133,11 @@ Kedua file tersebut saling melengkapi, di mana `games_detailed_info.csv` digunak
 | 4      | `ID`      | ID unik dari board game yang diulas (mengacu ke `games_detailed_info.csv`)   |
 | 5      | `name`    | Nama board game yang diulas                                                  |
 
+</div>
+
 ### Kondisi dataset: `games_detailed_info.csv`
+
+<div align="center">
 
 | **No** | **Fitur**                       | **Tipe Data** | **Jumlah Data** | **Missing** | **Unik** | **Contoh Nilai Unik**     |
 | ------ | ------------------------------- | ------------- | --------------- | ----------- | -------- | ------------------------- |
@@ -189,9 +197,13 @@ Kedua file tersebut saling melengkapi, di mana `games_detailed_info.csv` digunak
 | 54     | `Arcade Rank`                   | float64       | 1               | 21630       | 1        | `170.0`                   |
 | 55     | `Atari ST Rank`                 | float64       | 1               | 21630       | 1        | `140.0`                   |
 
+</div>
+
 Nilai duplikat tidak ditemukan berdasarkan kolom `id`. Sebagian besar fitur sudah cukup bersih dan siap untuk dianalisis, terdapat beberapa fitur utama yang dapat digunakan seperti `id`, `primary`, `yearpublished`, `minplayers`, `maxplayers`, `playingtime`, `boardgamemechanic`, dan `boardgamecategory`. Untuk mengatasi missing values pada fitur teks seperti `boardgamemechanic` dan `boardgamecategory`, baris dengan nilai kosong pada kolom tersebut harus dihapus karena fitur ini bersifat penting yang dapat digunakan proses pemodelan nanti.
 
 ### Kondisi dataset: `bgg-15m-reviews.csv`
+
+<div align="center">
 
 | **No** | **Fitur** | **Tipe Data** | **Jumlah Data** | **Missing** | **Unik**  | **Contoh Nilai Unik**                                       |
 | ------ | --------- | ------------- | --------------- | ----------- | --------- | ----------------------------------------------------------- |
@@ -201,13 +213,16 @@ Nilai duplikat tidak ditemukan berdasarkan kolom `id`. Sebagian besar fitur suda
 | 4      | `ID`      | int64         | 15.823.269      | 0           | 19.330    | `30549`, `822`, `13`, `68448`, `36218`                      |
 | 5      | `name`    | object        | 15.823.269      | 0           | 18.984    | `Pandemic`, `Carcassonne`, `Catan`, `7 Wonders`, `Dominion` |
 
+</div>
+
 Sebagian besar data telah bersih, namun terdapat **66 missing values** pada kolom `user`, serta **sekitar 12,8 juta missing values** pada kolom `comment`, yang wajar mengingat tidak semua pengguna menulis komentar saat memberikan rating. Tidak ditemukan nilai duplikat berdasarkan kombinasi `user` dan `ID`. Untuk kebutuhan analisis dan modeling, kolom `comment` dapat diabaikan, sementara kolom `user` dengan nilai kosong dapat dihapus atau diberi label `"anonymous"`.
 
 ### Exploratory Data Analysis (EDA):
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/36a40eb2-cb00-438e-ba70-fde67f5b5d6b" height="300"/>
-  <img src="https://github.com/user-attachments/assets/9091cc29-04d9-4762-9dc3-cb259eb72622" height="300"/>
+
+  <img src="https://github.com/user-attachments/assets/7df8aafd-53f7-4ec5-b216-1123b87590ce" height="300"/>
+  <img src="https://github.com/user-attachments/assets/fba02b2d-8baf-4143-9723-77adb2a54df1" height="300"/>
 </div>
 ‎ 
 
@@ -215,7 +230,7 @@ Sebagian besar data telah bersih, namun terdapat **66 missing values** pada kolo
 
 ‎ 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/70d694cf-75ab-4bc0-84c5-19ae975a0908" width="400"/>
+  <img src="https://github.com/user-attachments/assets/87bc20a4-2a59-4106-a512-d032ce409d05" width="400"/>
 </div>
 ‎ 
 
@@ -223,7 +238,7 @@ Tiga game teratas *Pandemic*, *Carcassonne*, *Catan* memiliki jumlah user yang m
 
 ‎ 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/d25f929b-dbef-457d-b0c3-b7f448850674" width="400"/>
+  <img src="https://github.com/user-attachments/assets/628f1c41-8915-4403-aa4d-56cd6af7b493" width="400"/>
 </div>
 ‎ 
 
@@ -236,17 +251,21 @@ Tahap ini bertujuan untuk mempersiapkan data sebelum digunakan dalam pelatihan m
 ### Penanganan Outlier:
 Distribusi jumlah seberapa sering pengguna melakukan rating menunjukkan adanya **user outlier**, yaitu pengguna yang lebih sering memberikan rating dibandingkan mayoritas pengguna lain. Keberadaan outlier ini dapat mendominasi proses pelatihan, terutama pada pendekatan collaborative filtering yang sangat bergantung pada pola interaksi. Langkah yang dilakukan menghapus seluruh interaksi dari user outlier. 
 
+<div align="center">
+
 | Keterangan                          | Jumlah     |
 | ----------------------------------- | ---------- |
 | Jumlah data awal                    | 15.823.269 |
 | Jumlah data setelah outlier dihapus | 6.149.427  |
 | Jumlah user setelah pembersihan     | 312.834    |
 
+</div>
+
 Sebagian besar user kini memiliki jumlah rating yang lebih merata. Penghapusan data outlier ini bertujuan untuk menjaga **keseimbangan kontribusi antar pengguna** dalam proses pelatihan dan menghindari overfitting terhadap preferensi minoritas ekstrem.
 
 ‎ 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/d25f929b-dbef-457d-b0c3-b7f448850674" width="400"/>
+  <img src="https://github.com/user-attachments/assets/8985dafb-30ba-4dc7-95ba-1f71cac17958" width="400"/>
 </div>
 ‎ 
 
@@ -351,6 +370,8 @@ Kategori: `['Ancient', 'Political', 'Wargame']`
 
 Output:
 
+<div align="center">
+
 | No | Game yang Direkomendasikan             | Kategori                             |
 | -- | -------------------------------------- | ------------------------------------ |
 | 1  | Pericles: The Peloponnesian Wars       | \['Ancient', 'Political', 'Wargame'] |
@@ -358,6 +379,8 @@ Output:
 | 3  | Imperium Romanum: The Clash of Legions | \['Ancient', 'Political', 'Wargame'] |
 | 4  | Nero                                   | \['Ancient', 'Political', 'Wargame'] |
 | 5  | Pax Romana                             | \['Ancient', 'Political', 'Wargame'] |
+
+</div>
 
 Rekomendasi ini sangat relevan secara tematis, menunjukkan efektivitas metode dalam memahami konten.
 
@@ -385,6 +408,8 @@ Pendekatan ini menggunakan data interaksi (rating) antar pengguna dan game untuk
 
 ####  **Spesifikasi Arsitektur**
 
+<div align="center">
+
 | **Komponen**          | **Spesifikasi**                     | **Alasan Pemilihan**                                                                                                                     |
 | --------------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | **Input Layer**       | `user`, `game` (sebagai indeks)     | Kedua entitas direpresentasikan sebagai indeks numerik agar dapat dipetakan ke dalam vektor embedding.                                   |
@@ -397,11 +422,15 @@ Pendekatan ini menggunakan data interaksi (rating) antar pengguna dan game untuk
 | **Epoch**             | 50                                  | Jumlah epoch cukup untuk mencapai konvergensi pada dataset besar tanpa overfitting. Telah diuji dengan validasi dan hasilnya stabil.     |
 | **Batch Size**        | 512                                 | Ukuran batch ini cocok untuk menyeimbangkan kecepatan pelatihan dan efisiensi memori, terutama saat menggunakan hardware GPU/TPU.        |
 
+</div>
+
 #### **Top-10 Recommendation**
 
 User: *josephcasey*   
 
 **Game dengan rating tinggi dari user:**
+
+<div align="center">
 
 | Game                                 | Category                                                                                  |
 |------------------------------------|-------------------------------------------------------------------------------------------|
@@ -411,7 +440,11 @@ User: *josephcasey*
 | The Lord of the Rings: Journeys in Middle-Earth | Adventure, Fantasy, Fighting, Miniatures, Novel-based                          |
 | Heroes of Land, Air & Sea            | Exploration, Fantasy, Fighting, Miniatures, Wargame                                       |
 
+</div>
+
 **Game yang direkomendasikan:**
+
+<div align="center">
 
 | Game                             | Category                                                                                             |
 |---------------------------------|----------------------------------------------------------------------------------------------------|
@@ -426,6 +459,7 @@ User: *josephcasey*
 | Brass: Birmingham               | Economic, Industry / Manufacturing, Post-Napoleonic, Transportation                               |
 | Gaia Project                   | Economic, Science Fiction, Space Exploration, Territory Building                                   |
 
+</div>
 
 Model mampu menyarankan game **yang belum pernah dimainkan**, namun relevan dengan pola rating historis pengguna.
 
@@ -440,10 +474,15 @@ Model mampu menyarankan game **yang belum pernah dimainkan**, namun relevan deng
 * Butuh dataset besar dan distribusi interaksi yang cukup merata untuk hasil yang optimal.
 
 ### Kelebihan dan Kekurangan Setiap Model:
+
+<div align="center">
+
 | Model                  | Kelebihan                                                                                                                                           | Kekurangan                                                                                                           |
 |------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
 | Content-Based Filtering | - Independen dari pengguna lain (baik untuk *cold-start*)<br>- Mudah dijelaskan lewat fitur konten<br>- Tidak butuh data dari pengguna lain<br>- Konsisten dalam rekomendasi jika fitur konten tetap | - Terbatas pada informasi konten<br>- Tidak menangkap preferensi pengguna tersembunyi<br>- Kurang inovatif (cenderung menyarankan item serupa) |
 | Collaborative Filtering | - Menangkap preferensi pengguna secara laten<br>- Bisa merekomendasikan game yang tidak mirip kontennya<br>- Menyesuaikan dengan tren komunitas<br>- Cocok untuk dataset besar dengan banyak interaksi | - Mengalami *cold-start problem* untuk pengguna atau item baru<br>- Butuh dataset besar dan interaksi merata<br>- Sulit dijelaskan alasan rekomendasinya |
+
+</div>
 
 ## Evaluation
 Pada tahap ini, dilakukan evaluasi terhadap sistem rekomendasi yang telah dibangun menggunakan dua pendekatan berbeda, yaitu **content-based filtering** dan **collaborative filtering**. Masing-masing pendekatan dievaluasi dengan metrik yang sesuai:
@@ -477,6 +516,8 @@ Pada tahap ini, dilakukan evaluasi terhadap sistem rekomendasi yang telah dibang
 
 ![Coverage](https://latex.codecogs.com/png.image?\huge&space;\dpi{110}\bg{white}$$\text{Coverage}=\frac{|\cup_{u\in&space;U}R_u|}{|I|}$$)
 
+<div align="center">
+
 | **Metrik**                | **Penjelasan**                                                                                                                                             |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Precision**             | Proporsi rekomendasi yang relevan dari semua item yang direkomendasikan.                                                                                   |
@@ -486,8 +527,12 @@ Pada tahap ini, dilakukan evaluasi terhadap sistem rekomendasi yang telah dibang
 | **Intra-list Similarity** | Mengukur kesamaan antar item dalam satu daftar rekomendasi. Nilai tinggi berarti rekomendasi lebih homogen.                                                |
 | **Coverage**              | Proporsi item yang direkomendasikan dibandingkan keseluruhan item yang tersedia. Nilai rendah bisa berarti sistem hanya mengekspos game yang itu-itu saja. |
 
+</div>
+
 ### Hasil Evaluasi (Content-Based Filtering):
 Berikut adalah hasil evaluasi model berdasarkan metrik Precission, Recall, F1-Score, Map\@K, Intra-list Similarity dan Coverage:
+
+<div align="center">
 
 | **Metrik**                | **Nilai** |
 | ------------------------- | --------- |
@@ -498,6 +543,8 @@ Berikut adalah hasil evaluasi model berdasarkan metrik Precission, Recall, F1-Sc
 | **Intra-list Similarity** | 0.934     |
 | **Coverage**              | 0.034     |
 | **Samples Evaluated**     | 159       |
+
+</div>
 
 **Precision** sebesar `0.620` menunjukkan bahwa lebih dari separuh item yang direkomendasikan memang relevan — ini merupakan indikator bahwa sistem memberikan rekomendasi yang cukup akurat.
 
@@ -525,18 +572,22 @@ Berikut adalah hasil evaluasi model berdasarkan metrik Precission, Recall, F1-Sc
 
 ![RMSE](https://latex.codecogs.com/png.image?\huge&space;\dpi{110}\bg{white}$$\text{RMSE}=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}$$)
 
+<div align="center">
+
 | **Metrik** | **Penjelasan**                                                                                                                       |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | **MSE**    | Mengukur rata-rata kuadrat selisih antara nilai aktual dan prediksi. Nilai lebih kecil menandakan model lebih akurat.                |
 | **MAE**    | Rata-rata selisih absolut antara prediksi dan nilai aktual. Lebih mudah diinterpretasikan karena satuannya sama dengan rating.       |
 | **RMSE**   | Akar dari MSE, memberi penalti lebih besar pada kesalahan besar. Sering digunakan sebagai metrik utama untuk evaluasi model regresi. |
 
+</div>
+
 ### Hasil Evaluasi (Content-Based Filtering):
 Berikut adalah hasil train model berdasarkan metrik MSE, MAE dan RMSE:
 
 ‎ 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/70d694cf-75ab-4bc0-84c5-19ae975a0908" width="400"/>
+  <img src="https://github.com/user-attachments/assets/cd9e6d1c-048f-45fa-bb72-48be92ce5b75" width="800"/>
 </div>
 ‎ 
 
